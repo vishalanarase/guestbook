@@ -2,12 +2,33 @@ syntax = "proto3";
 
 package auth;
 
+// Import the HTTP annotations
+import "google/api/annotations.proto";
+
 option go_package = "github.com/vishalanarase/guestbook/services/auth;auth";
 
 service AuthService {
-  rpc Register(RegisterRequest) returns (RegisterResponse) {}
-  rpc Login(LoginRequest) returns (LoginResponse) {}
-  rpc ValidateToken(ValidateTokenRequest) returns (ValidateTokenResponse) {}
+  rpc Register(RegisterRequest) returns (RegisterResponse) {
+    option (google.api.http) = {
+      post: "/v1/auth/register"
+      body: "*"
+    };
+  }
+
+  rpc Login(LoginRequest) returns (LoginResponse) {
+    option (google.api.http) = {
+      post: "/v1/auth/login"
+      body: "*"
+    };
+  }
+
+
+  rpc ValidateToken(ValidateTokenRequest) returns (ValidateTokenResponse) {
+    option (google.api.http) = {
+      post: "/v1/auth/validatetoken"
+      body: "*"
+    };
+  }
 }
 
 message RegisterRequest {
