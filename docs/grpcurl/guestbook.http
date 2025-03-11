@@ -16,7 +16,7 @@ grpcurl -plaintext localhost:50051 list guestbook.GuestbookService
 ###
 
 ### Request:
-grpcurl -plaintext -d '{"username": "vishal", "message": "Bye World", "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZpc2hhbCIsImF1ZCI6InZpc2hhbCIsImV4cCI6MTc0MTY5NjIwOSwiaWF0IjoxNzQxNjkyNjA5LCJpc3MiOiJndWVzdGJvb2stYXBwIn0.9tWe4zZJp0wyq_8G3636w0Ai78GX7g26NbIjzB3LBk0"}' localhost:50051 guestbook.GuestbookService.AddMessage
+grpcurl -plaintext -d '{"username": "vishal", "message": "Testing grpc", "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZpc2hhbCIsImF1ZCI6InZpc2hhbCIsImV4cCI6MTc0MTY5NjIwOSwiaWF0IjoxNzQxNjkyNjA5LCJpc3MiOiJndWVzdGJvb2stYXBwIn0.9tWe4zZJp0wyq_8G3636w0Ai78GX7g26NbIjzB3LBk0"}' localhost:50051 guestbook.GuestbookService.AddMessage
 ### Response:
 # {
 #     "success": true
@@ -28,6 +28,10 @@ grpcurl -plaintext -d '{"username": "vishal", "message": "Bye World", "token": "
 grpcurl -plaintext -d '{"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZpc2hhbCIsImF1ZCI6InZpc2hhbCIsImV4cCI6MTc0MTY5NjIwOSwiaWF0IjoxNzQxNjkyNjA5LCJpc3MiOiJndWVzdGJvb2stYXBwIn0.9tWe4zZJp0wyq_8G3636w0Ai78GX7g26NbIjzB3LBk0"}' localhost:50051 guestbook.GuestbookService.GetMessage
 ### Response:
 # {
-#     "messages": "Hello World"
+#     "messages": [
+#         "Bye World",
+#         "Hello World",
+#         "Testing grpc"
+#     ]
 # }
 ###
