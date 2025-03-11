@@ -12,13 +12,16 @@ service GuestbookService {
 message AddMessageRequest {
   string username = 1;
   string message = 2;
+  string token = 3;
 }
 
 message AddMessageResponse {
   bool success = 1;
 }
 
-message GetMessagesRequest {}
+message GetMessagesRequest {
+  string token = 1;
+}
 
 message GetMessageResponse {
  string messages = 1;
