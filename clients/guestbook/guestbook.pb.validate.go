@@ -61,6 +61,8 @@ func (m *AddMessageRequest) validate(all bool) error {
 
 	// no validation rules for Message
 
+	// no validation rules for Token
+
 	if len(errors) > 0 {
 		return AddMessageRequestMultiError(errors)
 	}
@@ -266,6 +268,8 @@ func (m *GetMessagesRequest) validate(all bool) error {
 	}
 
 	var errors []error
+
+	// no validation rules for Token
 
 	if len(errors) > 0 {
 		return GetMessagesRequestMultiError(errors)
