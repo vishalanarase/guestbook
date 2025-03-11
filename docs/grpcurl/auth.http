@@ -1,0 +1,34 @@
+### Select the request and  `cmd + shift + p`, then gRPC Client: Send Request to run it
+
+### Request:
+grpcurl  -plaintext localhost:50052 list
+### Response:
+# auth.AuthService
+# grpc.reflection.v1.ServerReflection
+# grpc.reflection.v1alpha.ServerReflection
+###
+
+### Request:
+grpcurl  -plaintext localhost:50052 list auth.AuthService
+
+### Response:
+#auth.AuthService.Login
+#auth.AuthService.Register
+###
+
+### Request:
+grpcurl -plaintext -d '{"username": "vishal", "password": "secret"}' localhost:50052 auth.AuthService.Register
+### Response:
+# {
+#     "success": true
+# }
+###
+
+### Request:
+grpcurl -plaintext -d '{"username": "vishal", "password": "secret"}' localhost:50052 auth.AuthService.Login
+### Response:
+# {
+#     "success": true,
+#     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDE2OTQzNDYsInVzZXJuYW1lIjoidmlzaGFsIn0.F8mT1-1piSP13AE3c28LhMyk_-1Oxlm6E_Ml9DS-Qt0"
+# }
+###
