@@ -1,11 +1,16 @@
 package main
 
 import (
+	"context"
+	"fmt"
 	"log"
 	"net"
 
 	"github.com/vishalanarase/guestbook/clients/auth"
+	"golang.org/x/crypto/bcrypt"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 var (
@@ -15,6 +20,25 @@ var (
 
 type server struct {
 	auth.UnimplementedAuthServiceServer
+}
+
+func (s *server) Register(ctx context.Context, req *auth.RegisterRequest) (*auth.RegisterResponse, error) {
+	// Check if user already exists
+	if _, exists := users[req.GetUsername()]; exists {
+		return nil, fmt.Errorf("user already exists")
+	}
+
+	// Hash the password
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to hash password: %v", err)
+	}
+
+	// Store the user in the map
+	users[req.Username] = string(hashedPassword)
+
+	// Return the response
+	return &auth.RegisterResponse{Success: true}, nil
 }
 
 func main() {
