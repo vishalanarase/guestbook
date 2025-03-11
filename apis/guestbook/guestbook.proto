@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package guestbook;
 
+option go_package = "github.com/vishalanarase/guestbook/services/guestbook;guestbook";
+
 service GuestbookService {
   rpc AddMessage(AddMessageRequest) returns (AddMessageResponse) {}
   rpc GetMessage(GetMessagesRequest) returns (GetMessageResponse) {}
