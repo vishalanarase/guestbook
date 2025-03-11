@@ -31,7 +31,7 @@ func main() {
 	auth.RegisterAuthServiceServer(s, &server{})
 
 	// Serve the gRPC server
-	log.Print("Starting server on port :50052")
+	log.Print("Auth service started on port :50052")
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
