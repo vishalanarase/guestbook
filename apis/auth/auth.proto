@@ -3,6 +3,7 @@ syntax = "proto3";
 package auth;
 
 // Import the HTTP annotations
+import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 
 option go_package = "github.com/vishalanarase/guestbook/services/auth;auth";
@@ -32,8 +33,8 @@ service AuthService {
 }
 
 message RegisterRequest {
-  string username = 1;
-  string password = 2;
+  string username = 1 [(buf.validate.field).required = true];
+  string password = 2 [(buf.validate.field).required = true];
 }
 
 message RegisterResponse {
@@ -41,9 +42,8 @@ message RegisterResponse {
 }
 
 message LoginRequest {
-  string username = 1;
-  string password = 2;
-}
+  string username = 1 [(buf.validate.field).required = true];
+  string password = 2 [(buf.validate.field).required = true];}
 
 message LoginResponse {
   bool success = 1;
@@ -51,7 +51,7 @@ message LoginResponse {
 }
 
 message ValidateTokenRequest {
-  string token = 1;
+  string token = 1 [(buf.validate.field).required = true];
 }
 
 message ValidateTokenResponse {
