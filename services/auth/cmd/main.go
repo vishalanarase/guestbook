@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"time"
 
+	"github.com/golang-jwt/jwt"
 	"github.com/vishalanarase/guestbook/clients/auth"
 	"golang.org/x/crypto/bcrypt"
 	"google.golang.org/grpc"
@@ -39,6 +41,36 @@ func (s *server) Register(ctx context.Context, req *auth.RegisterRequest) (*auth
 
 	// Return the response
 	return &auth.RegisterResponse{Success: true}, nil
+}
+
+// Login function to authenticate a user
+func (s *server) Login(ctx context.Context, req *auth.LoginRequest) (*auth.LoginResponse, error) {
+	// Get the hashed password for the user
+	hashedPassword, exists := users[req.Username]
+	if !exists {
+		return nil, status.Errorf(codes.NotFound, "user not found")
+	}
+
+	// Compare the hashed password with the provided password
+	if err := bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(req.Password)); err != nil {
+		return nil, status.Errorf(codes.Unauthenticated, "invalid password")
+	}
+
+	// Generate JWT token
+	// Generate JWT token
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"username": req.GetUsername(),
+		"exp":      time.Now().Add(time.Hour * 1).Unix(), // 1 hour expiry
+	})
+
+	// Sign the token with our secret key
+	tokenString, err := token.SignedString(secretKey)
+	if err != nil {
+		return nil, fmt.Errorf("could not create token: %v", err)
+	}
+
+	// Return the response
+	return &auth.LoginResponse{Token: tokenString, Success: true}, nil
 }
 
 func main() {

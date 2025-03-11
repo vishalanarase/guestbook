@@ -5,6 +5,7 @@ go 1.24.1
 replace github.com/vishalanarase/guestbook/clients/auth => ../../clients/auth
 
 require (
+	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/vishalanarase/guestbook/clients/auth v0.0.0-00010101000000-000000000000
 	golang.org/x/crypto v0.32.0
 	google.golang.org/grpc v1.71.0
