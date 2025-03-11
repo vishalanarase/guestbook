@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package guestbook;
+
+service GuestbookService {
+  rpc AddMessage(AddMessageRequest) returns (AddMessageResponse) {}
+  rpc GetMessage(GetMessagesRequest) returns (GetMessageResponse) {}
+}
+
+message AddMessageRequest {
+  string username = 1;
+  string message = 2;
+}
+
+message AddMessageResponse {
+  bool success = 1;
+}
+
+message GetMessagesRequest {}
+
+message GetMessageResponse {
+ string messages = 1;
+}
