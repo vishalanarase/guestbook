@@ -1,10 +1,12 @@
 package main
 
 import (
+	"context"
+	"fmt"
 	"log"
 	"net"
 
-	"github.com/siderolabs/go-api-signature/api/auth"
+	"github.com/vishalanarase/guestbook/clients/auth"
 	"github.com/vishalanarase/guestbook/clients/guestbook"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
@@ -16,7 +18,34 @@ type Auth struct {
 
 type server struct {
 	guestbook.UnimplementedGuestbookServiceServer
-	auth Auth
+	auth     Auth
+	messages []string
+}
+
+// AddMessage
+func (s *server) AddMessage(ctx context.Context, req *guestbook.AddMessageRequest) (*guestbook.AddMessageResponse, error) {
+	// Validate the token
+	_, err := s.auth.client.ValidateToken(ctx, &auth.ValidateTokenRequest{Token: req.GetToken()})
+	if err != nil {
+		return nil, fmt.Errorf("unauthenticated")
+	}
+
+	// Add the message to the list
+	s.messages = append(s.messages, req.GetMessage())
+
+	return &guestbook.AddMessageResponse{Success: true}, nil
+}
+
+// GetMessage
+func (s *server) GetMessage(ctx context.Context, req *guestbook.GetMessagesRequest) (*guestbook.GetMessageResponse, error) {
+	// Validate the token
+	_, err := s.auth.client.ValidateToken(ctx, &auth.ValidateTokenRequest{Token: req.GetToken()})
+	if err != nil {
+		return nil, fmt.Errorf("unauthenticated")
+	}
+
+	// Return the messages
+	return &guestbook.GetMessageResponse{Messages: s.messages[0]}, nil
 }
 
 func main() {
