@@ -1,0 +1,33 @@
+### Select the request and  `cmd + shift + p`, then gRPC Client: Send Request to run it
+
+### Request:
+grpcurl -plaintext localhost:50051 list
+### Response:
+# grpc.reflection.v1.ServerReflection
+# grpc.reflection.v1alpha.ServerReflection
+# guestbook.GuestbookService
+###
+
+### Request:
+grpcurl -plaintext localhost:50051 list guestbook.GuestbookService
+### Response:
+# guestbook.GuestbookService.AddMessage
+# guestbook.GuestbookService.GetMessage
+###
+
+### Request:
+grpcurl -plaintext -d '{"username": "vishal", "message": "Bye World", "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZpc2hhbCIsImF1ZCI6InZpc2hhbCIsImV4cCI6MTc0MTY5NjIwOSwiaWF0IjoxNzQxNjkyNjA5LCJpc3MiOiJndWVzdGJvb2stYXBwIn0.9tWe4zZJp0wyq_8G3636w0Ai78GX7g26NbIjzB3LBk0"}' localhost:50051 guestbook.GuestbookService.AddMessage
+### Response:
+# {
+#     "success": true
+# }
+###
+
+
+### Request:
+grpcurl -plaintext -d '{"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZpc2hhbCIsImF1ZCI6InZpc2hhbCIsImV4cCI6MTc0MTY5NjIwOSwiaWF0IjoxNzQxNjkyNjA5LCJpc3MiOiJndWVzdGJvb2stYXBwIn0.9tWe4zZJp0wyq_8G3636w0Ai78GX7g26NbIjzB3LBk0"}' localhost:50051 guestbook.GuestbookService.GetMessage
+### Response:
+# {
+#     "messages": "Hello World"
+# }
+###
