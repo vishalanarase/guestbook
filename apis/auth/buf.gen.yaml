@@ -1,0 +1,22 @@
+version: v2
+plugins:
+  - local: protoc-gen-go
+    out: ../../clients/auth
+    opt: paths=source_relative
+  - local: protoc-gen-go-grpc
+    out: ../../clients/auth
+    opt: paths=source_relative
+  - local: protoc-gen-grpc-gateway
+    out: ../../clients/auth
+    opt: paths=source_relative
+  - local: protoc-gen-openapiv2
+    out: openapi
+    opt:
+      - json_names_for_fields=false
+      - visibility_restriction_selectors=PUBLIC
+      - allow_merge=true
+      - merge_file_name=auth
+    strategy: all
+  - remote: buf.build/bufbuild/validate-go
+    out: ../../clients/auth
+    opt: paths=source_relative
