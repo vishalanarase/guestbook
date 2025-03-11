@@ -87,6 +87,25 @@ func (s *server) Login(ctx context.Context, req *auth.LoginRequest) (*auth.Login
 	return &auth.LoginResponse{Token: tokenString, Success: true}, nil
 }
 
+// ValidateToken function to validate a JWT token
+func (s *server) ValidateToken(ctx context.Context, req *auth.ValidateTokenRequest) (*auth.ValidateTokenResponse, error) {
+	// Parse the token
+	token, err := jwt.ParseWithClaims(req.GetToken(), &Claims{}, func(token *jwt.Token) (interface{}, error) {
+		return secretKey, nil
+	})
+	if err != nil {
+		return nil, status.Errorf(codes.Unauthenticated, "invalid token: %v", err)
+	}
+
+	// Check if the token is valid
+	if !token.Valid {
+		return nil, status.Error(codes.Unauthenticated, "invalid token")
+	}
+
+	// Return the response
+	return &auth.ValidateTokenResponse{Valid: true}, nil
+}
+
 func main() {
 	// Listen on port 50052
 	lis, err := net.Listen("tcp", ":50052")

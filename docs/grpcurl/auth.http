@@ -29,6 +29,14 @@ grpcurl -plaintext -d '{"username": "vishal", "password": "secret"}' localhost:5
 ### Response:
 # {
 #     "success": true,
-#     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDE2OTQzNDYsInVzZXJuYW1lIjoidmlzaGFsIn0.F8mT1-1piSP13AE3c28LhMyk_-1Oxlm6E_Ml9DS-Qt0"
+#     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZpc2hhbCIsImF1ZCI6InZpc2hhbCIsImV4cCI6MTc0MTY5NjIwOSwiaWF0IjoxNzQxNjkyNjA5LCJpc3MiOiJndWVzdGJvb2stYXBwIn0.9tWe4zZJp0wyq_8G3636w0Ai78GX7g26NbIjzB3LBk0"
+#}
+###
+
+### Request:
+grpcurl -plaintext -d '{"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZpc2hhbCIsImF1ZCI6InZpc2hhbCIsImV4cCI6MTc0MTY5NjIwOSwiaWF0IjoxNzQxNjkyNjA5LCJpc3MiOiJndWVzdGJvb2stYXBwIn0.9tWe4zZJp0wyq_8G3636w0Ai78GX7g26NbIjzB3LBk0"}' localhost:50052 auth.AuthService.ValidateToken
+### Response:
+# {
+#     "valid": true
 # }
 ###
