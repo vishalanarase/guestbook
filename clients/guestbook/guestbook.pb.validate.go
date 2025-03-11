@@ -373,8 +373,6 @@ func (m *GetMessageResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Messages
-
 	if len(errors) > 0 {
 		return GetMessageResponseMultiError(errors)
 	}

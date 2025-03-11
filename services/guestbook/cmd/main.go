@@ -45,7 +45,7 @@ func (s *server) GetMessage(ctx context.Context, req *guestbook.GetMessagesReque
 	}
 
 	// Return the messages
-	return &guestbook.GetMessageResponse{Messages: s.messages[0]}, nil
+	return &guestbook.GetMessageResponse{Messages: s.messages}, nil
 }
 
 func main() {
