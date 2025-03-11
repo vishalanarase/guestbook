@@ -7,6 +7,7 @@ import (
 	"github.com/siderolabs/go-api-signature/api/auth"
 	"github.com/vishalanarase/guestbook/clients/guestbook"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 type Auth struct {
@@ -44,6 +45,9 @@ func main() {
 			client: client,
 		},
 	})
+
+	// Register reflection service on gRPC server
+	reflection.Register(s)
 
 	// Serve the gRPC server
 	log.Print("Guestbook service started on port 50051")

@@ -12,6 +12,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/reflection"
 	"google.golang.org/grpc/status"
 )
 
@@ -57,7 +58,6 @@ func (s *server) Login(ctx context.Context, req *auth.LoginRequest) (*auth.Login
 	}
 
 	// Generate JWT token
-	// Generate JWT token
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"username": req.GetUsername(),
 		"exp":      time.Now().Add(time.Hour * 1).Unix(), // 1 hour expiry
@@ -85,6 +85,9 @@ func main() {
 
 	// Register the auth service with the gRPC server
 	auth.RegisterAuthServiceServer(s, &server{})
+
+	// Register reflection service on gRPC server
+	reflection.Register(s)
 
 	// Serve the gRPC server
 	log.Print("Auth service started on port :50052")
