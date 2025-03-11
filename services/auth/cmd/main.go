@@ -21,6 +21,12 @@ var (
 	users     = map[string]string{} // Map to store users (username -> hashed password)
 )
 
+// Struct for the JWT claims
+type Claims struct {
+	Username string `json:"username"`
+	jwt.StandardClaims
+}
+
 type server struct {
 	auth.UnimplementedAuthServiceServer
 }
@@ -57,11 +63,19 @@ func (s *server) Login(ctx context.Context, req *auth.LoginRequest) (*auth.Login
 		return nil, status.Errorf(codes.Unauthenticated, "invalid password")
 	}
 
+	// Generate a JWT token
+	claims := &Claims{
+		Username: req.GetUsername(),
+		StandardClaims: jwt.StandardClaims{
+			Audience:  req.GetUsername(),
+			Issuer:    "guestbook-app",
+			IssuedAt:  time.Now().Unix(),
+			ExpiresAt: time.Now().Add(1 * time.Hour).Unix(),
+		},
+	}
+
 	// Generate JWT token
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"username": req.GetUsername(),
-		"exp":      time.Now().Add(time.Hour * 1).Unix(), // 1 hour expiry
-	})
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
 	// Sign the token with our secret key
 	tokenString, err := token.SignedString(secretKey)
