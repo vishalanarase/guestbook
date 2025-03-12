@@ -7,7 +7,7 @@ Using OpenSSL to Generate RSA Keys
 1. Generate a private key:
 
 ```bash
-openssl genpkey -algorithm RSA -out auth-private-key.pem -aes256
+openssl genpkey -algorithm RSA -out auth-private-key.pem
 ```
 
 2. Verify the private key:
