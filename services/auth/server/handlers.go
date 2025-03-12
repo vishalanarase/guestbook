@@ -86,7 +86,8 @@ func (s *server) Login(ctx context.Context, req *auth.LoginRequest) (*auth.Login
 // ValidateToken function to validate a JWT token
 func (s *server) ValidateToken(ctx context.Context, req *auth.ValidateTokenRequest) (*auth.ValidateTokenResponse, error) {
 	// Parse the token
-	token, err := jwt.ParseWithClaims(req.GetToken(), &Claims{}, func(token *jwt.Token) (interface{}, error) {
+	claims := &Claims{}
+	token, err := jwt.ParseWithClaims(req.GetToken(), claims, func(token *jwt.Token) (interface{}, error) {
 		return secretKey, nil
 	})
 	if err != nil {
@@ -99,5 +100,5 @@ func (s *server) ValidateToken(ctx context.Context, req *auth.ValidateTokenReque
 	}
 
 	// Return the response
-	return &auth.ValidateTokenResponse{Valid: true}, nil
+	return &auth.ValidateTokenResponse{Valid: true, Username: claims.Username}, nil
 }
