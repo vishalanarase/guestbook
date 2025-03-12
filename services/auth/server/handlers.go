@@ -13,8 +13,7 @@ import (
 )
 
 var (
-	secretKey = []byte("secretkey") // Secret key for JWT signing
-	users     = map[string]string{} // Map to store users (username -> hashed password)
+	users = map[string]string{} // Map to store users (username -> hashed password)
 )
 
 // Struct for the JWT claims
@@ -71,10 +70,16 @@ func (s *server) Login(ctx context.Context, req *auth.LoginRequest) (*auth.Login
 	}
 
 	// Generate JWT token
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	token := jwt.NewWithClaims(jwt.SigningMethodRS256, claims)
+
+	// loadRSAPrivateKey function is removed from the code
+	privKey, err := loadRSAPrivateKey("../../../keys/auth-private-key.pem")
+	if err != nil {
+		return nil, fmt.Errorf("could not load private key: %v", err)
+	}
 
 	// Sign the token with our secret key
-	tokenString, err := token.SignedString(secretKey)
+	tokenString, err := token.SignedString(privKey)
 	if err != nil {
 		return nil, fmt.Errorf("could not create token: %v", err)
 	}
@@ -85,10 +90,17 @@ func (s *server) Login(ctx context.Context, req *auth.LoginRequest) (*auth.Login
 
 // ValidateToken function to validate a JWT token
 func (s *server) ValidateToken(ctx context.Context, req *auth.ValidateTokenRequest) (*auth.ValidateTokenResponse, error) {
+
+	// loadRSAPublicKey function is removed from the code
+	pubKey, err := loadRSAPublicKey("../../../keys/auth-public-key.pem")
+	if err != nil {
+		return nil, fmt.Errorf("could not load public key: %v", err)
+	}
+
 	// Parse the token
 	claims := &Claims{}
 	token, err := jwt.ParseWithClaims(req.GetToken(), claims, func(token *jwt.Token) (interface{}, error) {
-		return secretKey, nil
+		return pubKey, nil
 	})
 	if err != nil {
 		return nil, status.Errorf(codes.Unauthenticated, "invalid token: %v", err)
