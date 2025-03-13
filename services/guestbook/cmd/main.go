@@ -9,6 +9,7 @@ import (
 	"github.com/vishalanarase/guestbook/clients/auth"
 	"github.com/vishalanarase/guestbook/clients/guestbook"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/reflection"
 )
 
@@ -50,9 +51,9 @@ func (s *server) GetMessage(ctx context.Context, req *guestbook.GetMessagesReque
 
 func main() {
 	// Create a gRPC connection to the auth service
-	authConn, err := grpc.Dial("localhost:50052", grpc.WithInsecure())
+	authConn, err := grpc.NewClient("localhost:50052", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
-		log.Fatalf("failed to dial auth service: %v", err)
+		log.Fatalf("failed to dial auth server: %v", err)
 	}
 	defer authConn.Close()
 
