@@ -16,7 +16,7 @@ grpcurl -plaintext localhost:50051 list guestbook.GuestbookService
 ###
 
 ### Request:
-grpcurl -plaintext -d '{"username": "vishal", "message": "Testing grpc", "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZpc2hhbCIsImF1ZCI6InZpc2hhbCIsImV4cCI6MTc0MTY5NjIwOSwiaWF0IjoxNzQxNjkyNjA5LCJpc3MiOiJndWVzdGJvb2stYXBwIn0.9tWe4zZJp0wyq_8G3636w0Ai78GX7g26NbIjzB3LBk0"}' localhost:50051 guestbook.GuestbookService.AddMessage
+grpcurl -plaintext -d '{"username": "vishal", "message": "Testing grpc new", "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZpc2hhbCIsImF1ZCI6InZpc2hhbCIsImV4cCI6MTc0MTg1MjQ4NSwiaWF0IjoxNzQxODQ4ODg1LCJpc3MiOiJndWVzdGJvb2stYXBwIn0.qdEWaNbkYN9jMSqK6CdR64EolNA0uZuft8WX7FJiuyknlr1KXdPYtjs1IjQ3p9iSZiz8hmli9TVmcE2Qzs44mIZcFyOJ_p_gXEX-SliC8x8NVUrYRMZawp0a4mLvFubU6C1DkUae3yVkPrmmWiKmGHhqKMEWc2n0UIfMbMTMAlMyWmyXvergCp9OrqU06GpULTKYVhWhf-McKoRl9qh8VThE48PTJFn_aLIV_8O7KY8f1s2snD-ZQ3qOm4IOWbgv_ta6yCkeQ2qDj5-WfXXDUoytIwmmgQf0YtrriRjhLTVnWfD4rTr2eTb9JZjaMHRfkek6rIj2PULG3Dcf4d1Dvw"}' localhost:50051 guestbook.GuestbookService.AddMessage
 ### Response:
 # {
 #     "success": true
@@ -25,7 +25,7 @@ grpcurl -plaintext -d '{"username": "vishal", "message": "Testing grpc", "token"
 
 
 ### Request:
-grpcurl -plaintext -d '{"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZpc2hhbCIsImF1ZCI6InZpc2hhbCIsImV4cCI6MTc0MTY5NjIwOSwiaWF0IjoxNzQxNjkyNjA5LCJpc3MiOiJndWVzdGJvb2stYXBwIn0.9tWe4zZJp0wyq_8G3636w0Ai78GX7g26NbIjzB3LBk0"}' localhost:50051 guestbook.GuestbookService.GetMessage
+grpcurl -plaintext -d '{"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZpc2hhbCIsImF1ZCI6InZpc2hhbCIsImV4cCI6MTc0MTg1MjQ4NSwiaWF0IjoxNzQxODQ4ODg1LCJpc3MiOiJndWVzdGJvb2stYXBwIn0.qdEWaNbkYN9jMSqK6CdR64EolNA0uZuft8WX7FJiuyknlr1KXdPYtjs1IjQ3p9iSZiz8hmli9TVmcE2Qzs44mIZcFyOJ_p_gXEX-SliC8x8NVUrYRMZawp0a4mLvFubU6C1DkUae3yVkPrmmWiKmGHhqKMEWc2n0UIfMbMTMAlMyWmyXvergCp9OrqU06GpULTKYVhWhf-McKoRl9qh8VThE48PTJFn_aLIV_8O7KY8f1s2snD-ZQ3qOm4IOWbgv_ta6yCkeQ2qDj5-WfXXDUoytIwmmgQf0YtrriRjhLTVnWfD4rTr2eTb9JZjaMHRfkek6rIj2PULG3Dcf4d1Dvw"}' localhost:50051 guestbook.GuestbookService.GetMessage
 ### Response:
 # {
 #     "messages": [
