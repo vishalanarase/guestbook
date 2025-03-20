@@ -31,9 +31,12 @@ func (s *server) AddMessage(ctx context.Context, req *guestbook.AddMessageReques
 		return nil, fmt.Errorf("unauthenticated")
 	}
 
+	// Check if the messages map is nil if so create a new map
 	if s.messages == nil {
 		s.messages = make(map[string][]string)
 	}
+
+	// Check if the user has any messages in the map if not create a new list
 	if _, ok := s.messages[resp.GetUsername()]; !ok {
 		s.messages[resp.GetUsername()] = []string{}
 	}
