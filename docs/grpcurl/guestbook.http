@@ -24,7 +24,7 @@ grpcurl -plaintext -d '{"username": "vishal", "message": "Testing grpc new", "to
 ###
 
 ### Request:
-grpcurl -plaintext -d '{"username": "vishal", "message": "Testing grpc new", "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZpc2hhbCIsImF1ZCI6InZpc2hhbCIsImV4cCI6MTc0MjQ2MjAxOCwiaWF0IjoxNzQyNDU4NDE4LCJpc3MiOiJndWVzdGJvb2stYXBwIn0.idribtAkW9iTtq8ZFdT__DiJ8S97wNf8Fv7peWHJzkyjmMgGY8FLi9PhmAhxCVVzA6kfbWhTS7S3iDWeX27vO3G98H_cXwVGegNj-01egLv8WkMfYchjmvv-jPHGJi8t_ozFooLMhevcPWioyxigZCZxGI1MW3y1RP7ttQThQRSoj8L4cUFMD6auTGBBd07f5ooFxi9310KZWnoKtHE3V1OmJ3mdjfB_6RUFxaJEOoavCqHV0JrZo7rq_wuhCWrEs797bm6Q7o-jPTDPTqOZ7w81qOtPyyVjBS5s-cE_jT9BJONWeWNzmFlhbfHZXyZ0PVbrW9X-MWTRzi-pGOURsg"}' localhost:50051 guestbook.GuestbookService.AddMessage
+grpcurl -plaintext -d '{"username": "admin", "message": "Testing grpc admin", "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiYXVkIjoiYWRtaW4iLCJleHAiOjE3NDI0NjIxNjUsImlhdCI6MTc0MjQ1ODU2NSwiaXNzIjoiZ3Vlc3Rib29rLWFwcCJ9.VmBzuTZLlCuF8Zh7TRXbVsYISPPTNee9B_ZCrbI_L_ddCuvZJ1mErIZeztLph4eF37lEpRzjT7O3Uu2TeTLtH797g9jlYYzkrlayUyzIODnVNGoMslO9WhNl9Kt955YA37DPgvI9uO74lUHBZpFstkOmDTOuWTfEyOm0ipfogj4yj47BLvGojc-zR1e5qn_OL-s8i_tl-_vWuq1WdbJxrf5xE0Gg5pNomXziaKNtVRzrZmKuj9gL3zBa3Gpz8Pic-KuAEvydzKwHfusQkAzlqzgUpNGJo3JTUzzmBl121pWOPYrN0ey3hJLcEO1zIQnxYOw7BbaBj812OBTaKe7A2A"}' localhost:50051 guestbook.GuestbookService.AddMessage
 ### Response:
 # {
 #     "success": true
@@ -33,6 +33,18 @@ grpcurl -plaintext -d '{"username": "vishal", "message": "Testing grpc new", "to
 
 ### Request:
 grpcurl -plaintext -d '{"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZpc2hhbCIsImF1ZCI6InZpc2hhbCIsImV4cCI6MTc0MjQ2MjAxOCwiaWF0IjoxNzQyNDU4NDE4LCJpc3MiOiJndWVzdGJvb2stYXBwIn0.idribtAkW9iTtq8ZFdT__DiJ8S97wNf8Fv7peWHJzkyjmMgGY8FLi9PhmAhxCVVzA6kfbWhTS7S3iDWeX27vO3G98H_cXwVGegNj-01egLv8WkMfYchjmvv-jPHGJi8t_ozFooLMhevcPWioyxigZCZxGI1MW3y1RP7ttQThQRSoj8L4cUFMD6auTGBBd07f5ooFxi9310KZWnoKtHE3V1OmJ3mdjfB_6RUFxaJEOoavCqHV0JrZo7rq_wuhCWrEs797bm6Q7o-jPTDPTqOZ7w81qOtPyyVjBS5s-cE_jT9BJONWeWNzmFlhbfHZXyZ0PVbrW9X-MWTRzi-pGOURsg"}' localhost:50051 guestbook.GuestbookService.GetMessage
+### Response:
+# {
+#     "messages": [
+#         "Bye World",
+#         "Hello World",
+#         "Testing grpc"
+#     ]
+# }
+###
+
+### Request:
+grpcurl -plaintext -d '{"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiYXVkIjoiYWRtaW4iLCJleHAiOjE3NDI0NjIxNjUsImlhdCI6MTc0MjQ1ODU2NSwiaXNzIjoiZ3Vlc3Rib29rLWFwcCJ9.VmBzuTZLlCuF8Zh7TRXbVsYISPPTNee9B_ZCrbI_L_ddCuvZJ1mErIZeztLph4eF37lEpRzjT7O3Uu2TeTLtH797g9jlYYzkrlayUyzIODnVNGoMslO9WhNl9Kt955YA37DPgvI9uO74lUHBZpFstkOmDTOuWTfEyOm0ipfogj4yj47BLvGojc-zR1e5qn_OL-s8i_tl-_vWuq1WdbJxrf5xE0Gg5pNomXziaKNtVRzrZmKuj9gL3zBa3Gpz8Pic-KuAEvydzKwHfusQkAzlqzgUpNGJo3JTUzzmBl121pWOPYrN0ey3hJLcEO1zIQnxYOw7BbaBj812OBTaKe7A2A"}' localhost:50051 guestbook.GuestbookService.GetMessage
 ### Response:
 # {
 #     "messages": [
