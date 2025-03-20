@@ -53,7 +53,7 @@ POST {{url}}/v1/auth/register HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "vishal",
+    "username": "admin",
     "password": "secret"
 }
 
@@ -62,7 +62,7 @@ POST {{url}}/v1/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "vishal",
+    "username": "admin",
     "password": "secret"
 }
 
@@ -71,7 +71,7 @@ POST {{url}}/v1/auth/validatetoken HTTP/1.1
 Content-Type: application/json
 
 {
-    "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZpc2hhbCIsImF1ZCI6InZpc2hhbCIsImV4cCI6MTc0MTg1MjQ4NSwiaWF0IjoxNzQxODQ4ODg1LCJpc3MiOiJndWVzdGJvb2stYXBwIn0.qdEWaNbkYN9jMSqK6CdR64EolNA0uZuft8WX7FJiuyknlr1KXdPYtjs1IjQ3p9iSZiz8hmli9TVmcE2Qzs44mIZcFyOJ_p_gXEX-SliC8x8NVUrYRMZawp0a4mLvFubU6C1DkUae3yVkPrmmWiKmGHhqKMEWc2n0UIfMbMTMAlMyWmyXvergCp9OrqU06GpULTKYVhWhf-McKoRl9qh8VThE48PTJFn_aLIV_8O7KY8f1s2snD-ZQ3qOm4IOWbgv_ta6yCkeQ2qDj5-WfXXDUoytIwmmgQf0YtrriRjhLTVnWfD4rTr2eTb9JZjaMHRfkek6rIj2PULG3Dcf4d1Dvw"
+   "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZpc2hhbCIsImF1ZCI6InZpc2hhbCIsImV4cCI6MTc0MjQ2MjAxOCwiaWF0IjoxNzQyNDU4NDE4LCJpc3MiOiJndWVzdGJvb2stYXBwIn0.idribtAkW9iTtq8ZFdT__DiJ8S97wNf8Fv7peWHJzkyjmMgGY8FLi9PhmAhxCVVzA6kfbWhTS7S3iDWeX27vO3G98H_cXwVGegNj-01egLv8WkMfYchjmvv-jPHGJi8t_ozFooLMhevcPWioyxigZCZxGI1MW3y1RP7ttQThQRSoj8L4cUFMD6auTGBBd07f5ooFxi9310KZWnoKtHE3V1OmJ3mdjfB_6RUFxaJEOoavCqHV0JrZo7rq_wuhCWrEs797bm6Q7o-jPTDPTqOZ7w81qOtPyyVjBS5s-cE_jT9BJONWeWNzmFlhbfHZXyZ0PVbrW9X-MWTRzi-pGOURsg"
 }
 
 ###
