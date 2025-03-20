@@ -20,19 +20,26 @@ type Auth struct {
 type server struct {
 	guestbook.UnimplementedGuestbookServiceServer
 	auth     Auth
-	messages []string
+	messages map[string][]string
 }
 
 // AddMessage
 func (s *server) AddMessage(ctx context.Context, req *guestbook.AddMessageRequest) (*guestbook.AddMessageResponse, error) {
 	// Validate the token
-	_, err := s.auth.client.ValidateToken(ctx, &auth.ValidateTokenRequest{Token: req.GetToken()})
+	resp, err := s.auth.client.ValidateToken(ctx, &auth.ValidateTokenRequest{Token: req.GetToken()})
 	if err != nil {
 		return nil, fmt.Errorf("unauthenticated")
 	}
 
+	if s.messages == nil {
+		s.messages = make(map[string][]string)
+	}
+	if _, ok := s.messages[resp.GetUsername()]; !ok {
+		s.messages[resp.GetUsername()] = []string{}
+	}
+
 	// Add the message to the list
-	s.messages = append(s.messages, req.GetMessage())
+	s.messages[resp.GetUsername()] = append(s.messages[resp.GetUsername()], req.GetMessage())
 
 	return &guestbook.AddMessageResponse{Success: true}, nil
 }
@@ -40,13 +47,13 @@ func (s *server) AddMessage(ctx context.Context, req *guestbook.AddMessageReques
 // GetMessage
 func (s *server) GetMessage(ctx context.Context, req *guestbook.GetMessagesRequest) (*guestbook.GetMessageResponse, error) {
 	// Validate the token
-	_, err := s.auth.client.ValidateToken(ctx, &auth.ValidateTokenRequest{Token: req.GetToken()})
+	resp, err := s.auth.client.ValidateToken(ctx, &auth.ValidateTokenRequest{Token: req.GetToken()})
 	if err != nil {
 		return nil, fmt.Errorf("unauthenticated")
 	}
 
 	// Return the messages
-	return &guestbook.GetMessageResponse{Messages: s.messages}, nil
+	return &guestbook.GetMessageResponse{Messages: s.messages[resp.Username]}, nil
 }
 
 func main() {
